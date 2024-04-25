@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.auth.auth-login');
 });
 
-Route::get('/home', function () {
-    return view('pages.dashboard', ['type_menu' => 'Dashboard']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', function () {
+        return view('pages.home.dashboard', ['type_menu' => 'Dashboard']);
+    })->name('home');
 });
